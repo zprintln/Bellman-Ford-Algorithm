@@ -7,6 +7,9 @@ int main() {
 
     printf("============ unitTest1() ================\n");
     unitTest1();
-
+    printf("============ unitTest2() ================\n");
+    unitTest2();
+    printf("============ unitTest3() ================\n");
+    unitTest3();
     return 0;
 }
