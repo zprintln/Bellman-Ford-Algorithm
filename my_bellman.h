@@ -24,9 +24,18 @@ struct Graph {
 struct Graph* createGraph(int V, int E)
 {
 	struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+	// checks if graph is null in case of failed malloc
+	if (graph == NULL){
+		return NULL;
+	}
 	graph->V = V;
 	graph->E = E;
 	graph->edge = (struct Edge*)malloc(E * sizeof(struct Edge));
+	// checks if edge is null in case of failed malloc
+	if (graph->edge == NULL){
+		return NULL;
+	}
+
 	return graph;
 }
 
@@ -41,8 +50,12 @@ void printArr(int dist[], int n)
 // The main function that finds shortest distances from src
 // to all other vertices using Bellman-Ford algorithm. The
 // function also detects negative weight cycle
-void bellmanFord(struct Graph* graph, int src)
-{
+void bellmanFord(struct Graph* graph, int src){
+	
+	if (graph == NULL || graph->edge == NULL){
+		return;
+	}
+
 	int V = graph->V;
 	int E = graph->E;
 	int dist[V];
@@ -77,7 +90,7 @@ void bellmanFord(struct Graph* graph, int src)
 		int weight = graph->edge[i].weight;
 		if (dist[u] != INT_MAX
 			&& dist[u] + weight < dist[v]) {
-			printf("Graph contains negative weight cycle");
+			printf("Graph contains negative weight cycle\n");
 			return; // If negative cycle is detected, simply
 					// return
 		}
